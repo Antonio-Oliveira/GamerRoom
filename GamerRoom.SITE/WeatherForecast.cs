@@ -1,6 +1,6 @@
 using System;
 
-namespace GamerRoom.API
+namespace GamerRoom.SITE
 {
     public class WeatherForecast
     {
