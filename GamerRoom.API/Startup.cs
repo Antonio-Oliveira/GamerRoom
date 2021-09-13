@@ -1,7 +1,13 @@
+using GamerRoom.API.Data.Context;
+using GamerRoom.API.Repositories;
+using GamerRoom.API.Repositories.Interface;
+using GamerRoom.API.Service;
+using GamerRoom.API.Service.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +38,17 @@ namespace GamerRoom.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GamerRoom.API", Version = "v1" });
             });
+
+            // Database
+            services.AddDbContext<AppDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            // Services
+            services.AddScoped<IGameService, GameService>();
+
+            // Repositories
+            services.AddScoped<IGameRepository, GameRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

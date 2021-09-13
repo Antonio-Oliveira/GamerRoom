@@ -7,6 +7,8 @@ namespace GamerRoom.API.Dtos.ViewModel
 {
     public class GameViewModel
     {
+        public Guid Id { get; set; }
+
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -15,9 +17,11 @@ namespace GamerRoom.API.Dtos.ViewModel
 
         public string Publisher { get; set; }
 
-        public double Score { get; set; }
+        public string Genre { get; set; }
 
-        public int Members { get; set; }
+        public string Platform { get; set; }
+
+        public string Mode { get; set; }
 
     }
 }
