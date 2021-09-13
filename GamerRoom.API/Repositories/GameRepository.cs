@@ -1,4 +1,4 @@
-﻿using GamerRoom.API.Context;
+﻿using GamerRoom.API.Data.Context;
 using GamerRoom.API.Entities;
 using GamerRoom.API.Repositories.Interface;
 using System;
