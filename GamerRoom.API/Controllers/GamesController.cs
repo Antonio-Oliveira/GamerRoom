@@ -77,7 +77,7 @@ namespace GamerRoom.API.Controllers
             }
             catch (Exception err)
             {
-                return UnprocessableEntity("Já existe um game com este nome para esta produtora");
+                return UnprocessableEntity(err.Message);
             }
         }
 
