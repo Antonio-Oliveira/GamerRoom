@@ -23,5 +23,6 @@ namespace GamerRoom.API.Entities
 
         public string Mode { get; set; }
 
+        public DateTime ReleaseDate { get; set; }
     }
 }
