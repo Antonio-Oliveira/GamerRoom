@@ -19,11 +19,17 @@ namespace GamerRoom.API.Repositories
 
         public async Task Delete(Game game)
         {
-            _context.Games.Update(game);
-            await _context.SaveChangesAsync();
+            var exist = _context.Games.FirstOrDefault(item => item.Id == game.Id);
+
+            if (exist != null)
+            {
+                _context.Games.Remove(exist);
+                await _context.SaveChangesAsync();
+            }
+            
         }
 
-        public Task<List<Game>> Get()
+        public Task<IEnumerable<Game>> Get()
         {
             var games = _context.Games.ToList();
             return Task.FromResult(games);

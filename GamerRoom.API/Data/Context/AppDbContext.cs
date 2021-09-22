@@ -1,5 +1,6 @@
 ﻿using GamerRoom.API.Data.Mappings;
 using GamerRoom.API.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GamerRoom.API.Data.Context
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
@@ -19,5 +20,7 @@ namespace GamerRoom.API.Data.Context
         }
 
         public DbSet<Game> Games { get; set; }
+
+        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
