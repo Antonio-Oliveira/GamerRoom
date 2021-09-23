@@ -47,6 +47,29 @@ namespace GamerRoom.API
             #region Swagger
             services.AddSwaggerGen(c =>
             {
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer schema (Example: 'Bearer 12345abcdef')",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                       new OpenApiSecurityScheme
+                       {
+                           Reference = new OpenApiReference
+                           {
+                               Type = ReferenceType.SecurityScheme,
+                               Id = "Bearer"
+                           }
+                       },
+                       Array.Empty<string>()
+                    }
+                });
+
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GamerRoom.API", Version = "v1" });
 
                 var basePath = AppDomain.CurrentDomain.BaseDirectory;
