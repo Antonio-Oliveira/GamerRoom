@@ -50,11 +50,16 @@ namespace GamerRoom.API.Service
 
         public async Task Login(LoginInputModel loginIM)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginIM.Email, loginIM.Password, false, true);
+            var user = await _userManager.FindByEmailAsync(loginIM.Email);
 
-            if (!result.Succeeded) 
+            if (user == null)
                 throw new Exception("Email ou Senha incorreto");
-             
+
+            var result = await _signInManager.PasswordSignInAsync(user, loginIM.Password, false, false);
+
+            if (!result.Succeeded)
+                throw new Exception("Email ou Senha incorreto");
+
         }
 
         public async Task Register(RegisterInputModel registerIM)
@@ -68,7 +73,10 @@ namespace GamerRoom.API.Service
             var result = await _userManager.CreateAsync(user, registerIM.Password);
 
             if (!result.Succeeded)
+            {
+                Console.WriteLine(result.Errors);
                 throw new Exception("Erro no cadastro do usuário");
+            }
 
             await _signInManager.SignInAsync(user, false);
         }

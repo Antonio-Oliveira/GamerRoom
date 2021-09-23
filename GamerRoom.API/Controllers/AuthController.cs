@@ -30,7 +30,7 @@ namespace GamerRoom.API.Controllers
                     return BadRequest(ModelState.Values.SelectMany(err => err.Errors));
 
                 await _userService.Register(registerIM);
-                return Created("", registerIM);
+                return Created("", _userService.GerarToken(registerIM.Email));
             }
             catch (Exception err)
             {
