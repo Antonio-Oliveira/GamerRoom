@@ -4,6 +4,9 @@ using GamerRoom.API.Repositories;
 using GamerRoom.API.Repositories.Interface;
 using GamerRoom.API.Service;
 using GamerRoom.API.Service.Interfaces;
+using GamerRoom.API.Token;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,12 +17,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GamerRoom.API
@@ -38,6 +43,8 @@ namespace GamerRoom.API
         {
 
             services.AddControllers();
+
+            #region Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GamerRoom.API", Version = "v1" });
@@ -46,18 +53,23 @@ namespace GamerRoom.API
                 var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
                 c.IncludeXmlComments(Path.Combine(basePath, fileName));
             });
+            #endregion
 
-            // Database
+            #region Database
             services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            #endregion
 
-            // Services
+            #region Services
             services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IUserService, UserService>();
+            #endregion
 
-            // Repositories
+            #region Repositories
             services.AddScoped<IGameRepository, GameRepository>();
+            #endregion
 
-            // Configs Identity
+            #region Identity
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 // Password settings.
@@ -84,6 +96,34 @@ namespace GamerRoom.API
                 options.SignIn.RequireConfirmedPhoneNumber = false;
 
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<AppDbContext>();
+            #endregion
+
+            #region JWT
+            var tokenSettingsSection = Configuration.GetSection("TokenSettings");
+            services.Configure<TokenSettings>(tokenSettingsSection);
+
+            var tokenSettings = tokenSettingsSection.Get<TokenSettings>();
+            var key = Encoding.ASCII.GetBytes(tokenSettings.Secret);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = true;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = tokenSettings.ValidoEm,
+                    ValidIssuer = tokenSettings.Emissor
+                };
+            });
+            #endregion
 
         }
 

@@ -1,6 +1,7 @@
 ﻿using GamerRoom.API.Dtos.InputModel;
 using GamerRoom.API.Dtos.ViewModel;
 using GamerRoom.API.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
 {
+    [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class GamesController : ControllerBase
@@ -35,7 +37,7 @@ namespace GamerRoom.API.Controllers
             var games = await _gameService.Get();
 
             if (games.Count() == 0)
-                return NoContent();
+              return NoContent();
 
             return Ok(games);
         }
