@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GamerRoom.API.Migrations
+namespace GamerRoom.API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210924164537_UserGames")]
-    partial class UserGames
+    [Migration("20210924165446_PopuleTable")]
+    partial class PopuleTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
