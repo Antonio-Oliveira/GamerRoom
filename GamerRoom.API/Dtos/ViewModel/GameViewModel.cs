@@ -26,6 +26,5 @@ namespace GamerRoom.API.Dtos.ViewModel
         public DateTime ReleaseDate { get; set; }
 
         public double Rating { get; set; }
-
     }
 }

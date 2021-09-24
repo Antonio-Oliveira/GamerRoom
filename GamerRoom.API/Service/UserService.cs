@@ -19,28 +19,11 @@ namespace GamerRoom.API.Service
             _userRepository = userRepository;
         }
 
-        public async Task AddGame(GameListInputModel gameListIM, string userId)
-        {
-            var exist = await _userRepository.GetGame(gameListIM.IdGame, userId);
-
-            if (exist != null)
-                throw new Exception("Game já adicionado a lista");
-
-            var gameListUser = new UserGame()
-            {
-                GameId = gameListIM.IdGame,
-                UserId = userId,
-                Rating = gameListIM.Rating
-            };
-
-            await _userRepository.InsertGame(gameListUser);
-        }
-
         public async Task<GameViewModel> GetGame(Guid idGame, string userId)
         {
             var gameUser = await _userRepository.GetGame(idGame, userId);
 
-            var gameVM = new GameViewModel() 
+            var gameVM = new GameViewModel()
             {
                 Rating = gameUser.Rating,
                 Description = gameUser.Game.Description,
@@ -61,7 +44,7 @@ namespace GamerRoom.API.Service
         {
             var userGames = await _userRepository.ListGames(userId);
 
-            return userGames.Select(gameUser => new GameViewModel() 
+            return userGames.Select(gameUser => new GameViewModel()
             {
                 Rating = gameUser.Rating,
                 Description = gameUser.Game.Description,
@@ -76,6 +59,23 @@ namespace GamerRoom.API.Service
             }).ToList();
         }
 
+        public async Task AddGame(GameListInputModel gameListIM, string userId)
+        {
+            var exist = await _userRepository.GetGame(gameListIM.IdGame, userId);
+
+            if (exist != null)
+                throw new Exception("Game já adicionado a lista");
+
+            var gameListUser = new UserGame()
+            {
+                GameId = gameListIM.IdGame,
+                UserId = userId,
+                Rating = gameListIM.Rating
+            };
+
+            await _userRepository.InsertGame(gameListUser);
+        }
+
         public async Task RemoveGame(Guid idGame, string userId)
         {
             var game = await _userRepository.GetGame(idGame, userId);
@@ -84,7 +84,6 @@ namespace GamerRoom.API.Service
                 throw new Exception("Game já adicionado a lista");
 
             await _userRepository.RemoveGame(game);
-
         }
 
         public async Task UpdateRating(Guid idGame, double rating, string userId)

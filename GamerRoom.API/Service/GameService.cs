@@ -35,18 +35,6 @@ namespace GamerRoom.API.Service
         {
             var games = await _gameRepository.Get();
 
-            /*var notas = await _userRepository.GetGames();
-            var teste = notas.GroupBy(x => x.GameId);
-
-            foreach (var item in teste)
-            {
-                Console.WriteLine(item.Count());
-            }
-
-            if (games.Count == 0)
-                return null;
-            */
-
             return games.Select(games => new GameViewModel
             {
                 Id = games.Id,

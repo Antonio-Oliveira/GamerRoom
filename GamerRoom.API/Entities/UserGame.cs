@@ -16,5 +16,7 @@ namespace GamerRoom.API.Entities
         public double Rating { get; set; }
 
         public virtual Game Game { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
     }
 }
