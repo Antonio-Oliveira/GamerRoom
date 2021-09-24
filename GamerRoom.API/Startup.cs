@@ -36,6 +36,8 @@ namespace GamerRoom.API
             Configuration = configuration;
         }
 
+        readonly string CorsPolicy = "_corsPolicy ";
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -105,6 +107,14 @@ namespace GamerRoom.API
             var tokenSettings = tokenSettingsSection.Get<TokenSettings>();
             var key = Encoding.ASCII.GetBytes(tokenSettings.Secret);
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CorsPolicy,
+                builder => builder.WithOrigins("http://localhost:4200", "http://localhost:4200"))
+                .AllowAnyHeader();
+                .AllowAnyMethod();
+            });
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -130,6 +140,12 @@ namespace GamerRoom.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(builder => builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            );
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -141,12 +157,14 @@ namespace GamerRoom.API
 
             app.UseRouting();
 
+            app.UseCors("*");
+
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllers()RequireCors(CorsPolicy);
             });
         }
     }
