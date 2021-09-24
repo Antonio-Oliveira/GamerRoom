@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace GamerRoom.API.Migrations
+namespace GamerRoom.API.Data.Migrations
 {
     public partial class InitialMigration : Migration
     {
@@ -171,6 +171,32 @@ namespace GamerRoom.API.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TB_USERGAMES",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RATING = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_USERGAMES", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_GAME_ID",
+                        column: x => x.GameId,
+                        principalTable: "TB_GAMES",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_USER_ID",
+                        column: x => x.ID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -209,6 +235,11 @@ namespace GamerRoom.API.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_USERGAMES_GameId",
+                table: "TB_USERGAMES",
+                column: "GameId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,10 +260,13 @@ namespace GamerRoom.API.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "TB_GAMES");
+                name: "TB_USERGAMES");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "TB_GAMES");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
