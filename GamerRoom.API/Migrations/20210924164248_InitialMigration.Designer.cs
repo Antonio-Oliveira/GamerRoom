@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace GamerRoom.API.Data.Migrations
+namespace GamerRoom.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210921225158_IdentityUser")]
-    partial class IdentityUser
+    [Migration("20210924164248_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
