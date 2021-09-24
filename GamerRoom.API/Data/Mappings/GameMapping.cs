@@ -15,7 +15,6 @@ namespace GamerRoom.API.Data.Mappings
             builder.ToTable("TB_GAMES"); // Nome Tabela
 
             // Propriedades
-
             builder.HasKey(p => p.Id); // PK
 
             builder.Property(p => p.Id)

@@ -1,11 +1,13 @@
 ﻿using GamerRoom.API.Dtos.InputModel;
 using GamerRoom.API.Entities;
 using GamerRoom.API.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
@@ -14,11 +16,11 @@ namespace GamerRoom.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IAuthService _authService;
 
-        public AuthController(IUserService userService)
+        public AuthController(IAuthService authService)
         {
-            _userService = userService;
+            _authService = authService;
         }
 
         [HttpPost("Register")]
@@ -29,8 +31,8 @@ namespace GamerRoom.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState.Values.SelectMany(err => err.Errors));
 
-                await _userService.Register(registerIM);
-                return Created("", _userService.GerarToken(registerIM.Email));
+                await _authService.Register(registerIM);
+                return Created("", _authService.GerarToken(registerIM.Email));
             }
             catch (Exception err)
             {
@@ -47,9 +49,9 @@ namespace GamerRoom.API.Controllers
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState.Values.SelectMany(err => err.Errors));
 
-                await _userService.Login(loginIM);
+                await _authService.Login(loginIM);
 
-                return Ok(await _userService.GerarToken(loginIM.Email));
+                return Ok(await _authService.GerarToken(loginIM.Email));
             }
             catch (Exception err)
             {
