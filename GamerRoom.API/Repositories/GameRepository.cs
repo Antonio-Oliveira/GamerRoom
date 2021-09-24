@@ -1,6 +1,7 @@
 ﻿using GamerRoom.API.Data.Context;
 using GamerRoom.API.Entities;
 using GamerRoom.API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,32 +20,26 @@ namespace GamerRoom.API.Repositories
 
         public async Task Delete(Game game)
         {
-            var exist = _context.Games.FirstOrDefault(item => item.Id == game.Id);
-
-            if (exist != null)
-            {
-                _context.Games.Remove(exist);
-                await _context.SaveChangesAsync();
-            }
-            
+            _context.Games.Remove(game);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Game>> Get()
+        public async Task<List<Game>> Get()
         {
-            var games = _context.Games.ToList();
-            return Task.FromResult(games);
+            var games = await _context.Games.ToListAsync();
+            return games;
         }
 
-        public Task<Game> GetGameById(Guid idGame)
+        public async Task<Game> GetGameById(Guid idGame)
         {
-            var game = _context.Games.FirstOrDefault(games => games.Id == idGame);
-            return Task.FromResult(game);
+            var game = await _context.Games.FirstOrDefaultAsync(games => games.Id == idGame);
+            return game;
         }
 
-        public Task<Game> GetGameByName(string name)
+        public async Task<Game> GetGameByName(string name)
         {
-            var game = _context.Games.FirstOrDefault(games => games.Name == name);
-            return Task.FromResult(game);
+            var game = await _context.Games.FirstOrDefaultAsync(games => games.Name == name);
+            return game;
         }
 
         public async Task Insert(Game game)

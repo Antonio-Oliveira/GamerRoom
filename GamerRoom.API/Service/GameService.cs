@@ -13,10 +13,12 @@ namespace GamerRoom.API.Service
     public class GameService : IGameService
     {
         private readonly IGameRepository _gameRepository;
+        private readonly IUserRepository _userRepository;
 
-        public GameService(IGameRepository gameRepository)
+        public GameService(IGameRepository gameRepository, IUserRepository userRepository)
         {
             _gameRepository = gameRepository;
+            _userRepository = userRepository;
         }
 
         public async Task Delete(Guid idGame)
@@ -32,9 +34,6 @@ namespace GamerRoom.API.Service
         public async Task<List<GameViewModel>> Get()
         {
             var games = await _gameRepository.Get();
-
-            if (games.Count == 0)
-                return null;
 
             return games.Select(games => new GameViewModel
             {

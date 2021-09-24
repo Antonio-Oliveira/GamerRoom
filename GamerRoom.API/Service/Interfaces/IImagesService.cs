@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GamerRoom.API.Token
+namespace GamerRoom.API.Service.Interfaces
 {
-    public class JwtSecurityKey
+    public interface IImagesService
     {
     }
 }
