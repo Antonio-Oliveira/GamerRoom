@@ -21,6 +21,6 @@ namespace GamerRoom.API.Data.Context
 
         public DbSet<Game> Games { get; set; }
 
-        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<UserGame> ListUserGames { get; set; }
     }
 }

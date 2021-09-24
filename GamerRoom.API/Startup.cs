@@ -41,9 +41,6 @@ namespace GamerRoom.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-
             #region Swagger
             services.AddSwaggerGen(c =>
             {
@@ -85,7 +82,7 @@ namespace GamerRoom.API
 
             #region Services
             services.AddScoped<IGameService, GameService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
             #endregion
 
             #region Repositories
@@ -148,6 +145,7 @@ namespace GamerRoom.API
             });
             #endregion
 
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
