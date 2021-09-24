@@ -32,7 +32,9 @@ namespace GamerRoom.API.Controllers
                     return BadRequest(ModelState.Values.SelectMany(err => err.Errors));
 
                 await _authService.Register(registerIM);
-                return Created("", _authService.GerarToken(registerIM.Email));
+                var token = await _authService.GerarToken(registerIM.Email);
+
+                return Created("", token);
             }
             catch (Exception err)
             {
@@ -50,8 +52,9 @@ namespace GamerRoom.API.Controllers
                     return BadRequest(ModelState.Values.SelectMany(err => err.Errors));
 
                 await _authService.Login(loginIM);
+                var token = await _authService.GerarToken(loginIM.Email);
 
-                return Ok(await _authService.GerarToken(loginIM.Email));
+                return Ok(token);
             }
             catch (Exception err)
             {

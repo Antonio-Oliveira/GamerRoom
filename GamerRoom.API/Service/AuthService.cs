@@ -70,6 +70,11 @@ namespace GamerRoom.API.Service
 
         public async Task Register(RegisterInputModel registerIM)
         {
+            var exist = await _userManager.FindByEmailAsync(registerIM.Email);
+
+            if (exist != null)
+                throw new Exception("Email já cadastrado");
+
             var user = new ApplicationUser()
             {
                 Email = registerIM.Email,
@@ -79,10 +84,7 @@ namespace GamerRoom.API.Service
             var result = await _userManager.CreateAsync(user, registerIM.Password);
 
             if (!result.Succeeded)
-            {
-                Console.WriteLine(result.Errors);
                 throw new Exception("Erro no cadastro do usuário");
-            }
 
             await _signInManager.SignInAsync(user, false);
         }
