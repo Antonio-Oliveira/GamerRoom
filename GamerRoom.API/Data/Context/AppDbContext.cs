@@ -16,6 +16,7 @@ namespace GamerRoom.API.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new GameMapping());
+            modelBuilder.ApplyConfiguration(new UserGameMapping());
             base.OnModelCreating(modelBuilder);
         }
 

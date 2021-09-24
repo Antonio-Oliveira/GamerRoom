@@ -25,9 +25,9 @@ namespace GamerRoom.API.Data.Mappings
                 .IsRequired()
                 .HasColumnName("RATING");
 
-            builder.HasOne(p => p.UserId)
+            builder.HasOne(p => p.User)
                 .WithMany()
-                .HasForeignKey(fk => fk.User.Id)
+                .HasForeignKey(fk => fk.Id)
                 .HasConstraintName("FK_USER_ID");
 
             builder.HasOne(p => p.Game)
