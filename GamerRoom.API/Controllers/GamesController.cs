@@ -12,9 +12,8 @@ using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
 {
-    [EnableCors("CorsApi")]
 
- //   [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GamesController : ControllerBase
@@ -33,6 +32,7 @@ namespace GamerRoom.API.Controllers
         /// <response code="204">Caso não haja Games</response>  
         [SwaggerResponse(statusCode: 200, description: "Sucesso ao obter Games")]
         [SwaggerResponse(statusCode: 204, description: "Nenhum Game encontrado")]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<GameViewModel>> Get()
         {
@@ -52,6 +52,7 @@ namespace GamerRoom.API.Controllers
         /// <response code="204">Caso não haja o Game</response>
         [SwaggerResponse(statusCode: 200, description: "Sucesso ao obter Game")]
         [SwaggerResponse(statusCode: 204, description: "Game não cadastrado")]
+        [AllowAnonymous]
         [HttpGet("{idGame:guid}")]
         public async Task<ActionResult<GameViewModel>> Get([FromRoute] Guid idGame)
         {
