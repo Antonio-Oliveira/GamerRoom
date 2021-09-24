@@ -1,84 +1,108 @@
 ﻿using GamerRoom.API.Dtos.InputModel;
+using GamerRoom.API.Dtos.ViewModel;
 using GamerRoom.API.Entities;
+using GamerRoom.API.Repositories.Interface;
 using GamerRoom.API.Service.Interfaces;
-using GamerRoom.API.Token;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GamerRoom.API.Service
 {
     public class UserService : IUserService
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly TokenSettings _tokenSettings;
+        private readonly IUserRepository _userRepository;
 
-        public UserService(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IOptions<TokenSettings> tokenSettings)
+        public UserService(IUserRepository userRepository)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _tokenSettings = tokenSettings.Value;
+            _userRepository = userRepository;
         }
 
-        public async Task<string> GerarToken(string email)
+        public async Task<GameViewModel> GetGame(Guid idGame, string userId)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var gameUser = await _userRepository.GetGame(idGame, userId);
 
-            if (user == null)
-                throw new Exception("Email inválido");
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_tokenSettings.Secret);
-
-            var tokenDescripter = new SecurityTokenDescriptor
+            var gameVM = new GameViewModel()
             {
-                Issuer = _tokenSettings.Emissor,
-                Audience = _tokenSettings.ValidoEm,
-                Expires = DateTime.UtcNow.AddHours(_tokenSettings.ExpiracaoHoras),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                Rating = gameUser.Rating,
+                Description = gameUser.Game.Description,
+                Developer = gameUser.Game.Developer,
+                Genre = gameUser.Game.Genre,
+                Mode = gameUser.Game.Mode,
+                Name = gameUser.Game.Name,
+                Platform = gameUser.Game.Platform,
+                Publisher = gameUser.Game.Publisher,
+                ReleaseDate = gameUser.Game.ReleaseDate,
+                Id = gameUser.GameId
             };
 
-            return tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescripter));
+            return gameVM;
         }
 
-        public async Task Login(LoginInputModel loginIM)
+        public async Task<List<GameViewModel>> MyListGames(string userId)
         {
-            var user = await _userManager.FindByEmailAsync(loginIM.Email);
+            var userGames = await _userRepository.ListGames(userId);
 
-            if (user == null)
-                throw new Exception("Email ou Senha incorreto");
-
-            var result = await _signInManager.PasswordSignInAsync(user, loginIM.Password, false, false);
-
-            if (!result.Succeeded)
-                throw new Exception("Email ou Senha incorreto");
-
-        }
-
-        public async Task Register(RegisterInputModel registerIM)
-        {
-            var user = new ApplicationUser()
+            return userGames.Select(gameUser => new GameViewModel()
             {
-                Email = registerIM.Email,
-                UserName = registerIM.UserName
+                Rating = gameUser.Rating,
+                Description = gameUser.Game.Description,
+                Developer = gameUser.Game.Developer,
+                Genre = gameUser.Game.Genre,
+                Mode = gameUser.Game.Mode,
+                Name = gameUser.Game.Name,
+                Platform = gameUser.Game.Platform,
+                Publisher = gameUser.Game.Publisher,
+                ReleaseDate = gameUser.Game.ReleaseDate,
+                Id = gameUser.GameId
+            }).ToList();
+        }
+
+        public async Task AddGame(GameListInputModel gameListIM, string userId)
+        {
+            var exist = await _userRepository.GetGame(gameListIM.IdGame, userId);
+
+            if (exist != null)
+                throw new Exception("Game já adicionado a lista");
+
+            var gameListUser = new UserGame()
+            {
+                GameId = gameListIM.IdGame,
+                UserId = userId,
+                Rating = gameListIM.Rating
             };
 
-            var result = await _userManager.CreateAsync(user, registerIM.Password);
-
-            if (!result.Succeeded)
-            {
-                Console.WriteLine(result.Errors);
-                throw new Exception("Erro no cadastro do usuário");
-            }
-
-            await _signInManager.SignInAsync(user, false);
+            await _userRepository.InsertGame(gameListUser);
         }
+
+        public async Task RemoveGame(Guid idGame, string userId)
+        {
+            var game = await _userRepository.GetGame(idGame, userId);
+
+            if (game == null)
+                throw new Exception("Game já adicionado a lista");
+
+            await _userRepository.RemoveGame(game);
+        }
+
+        public async Task UpdateRating(Guid idGame, double rating, string userId)
+        {
+            var game = await _userRepository.GetGame(idGame, userId);
+
+            if (game != null)
+                throw new Exception("Game já adicionado a lista");
+
+            var updateGame = new UserGame()
+            {
+                UserId = userId,
+                Rating = rating,
+                GameId = idGame,
+                Id = game.Id
+            };
+
+            await _userRepository.UpdateRating(updateGame);
+        }
+
     }
 }

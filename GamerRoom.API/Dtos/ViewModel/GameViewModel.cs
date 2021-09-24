@@ -23,5 +23,8 @@ namespace GamerRoom.API.Dtos.ViewModel
 
         public string Mode { get; set; }
 
+        public DateTime ReleaseDate { get; set; }
+
+        public double Rating { get; set; }
     }
 }

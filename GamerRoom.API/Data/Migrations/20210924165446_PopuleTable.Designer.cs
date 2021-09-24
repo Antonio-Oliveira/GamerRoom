@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerRoom.API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210921225158_IdentityUser")]
-    partial class IdentityUser
+    [Migration("20210924165446_PopuleTable")]
+    partial class PopuleTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,6 +134,30 @@ namespace GamerRoom.API.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TB_GAMES");
+                });
+
+            modelBuilder.Entity("GamerRoom.API.Entities.UserGame", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("ID");
+
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("Rating")
+                        .HasColumnType("float")
+                        .HasColumnName("RATING");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("TB_USERGAMES");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -265,6 +289,27 @@ namespace GamerRoom.API.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("GamerRoom.API.Entities.UserGame", b =>
+                {
+                    b.HasOne("GamerRoom.API.Entities.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .HasConstraintName("FK_GAME_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GamerRoom.API.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .HasConstraintName("FK_USER_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
