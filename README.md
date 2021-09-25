@@ -1,5 +1,12 @@
 <div align="center" style="display: flex">
-   <img height="303em" src="https://imgur.com/8zpqOxl.png"/>
+   <img height="303em" src="https://imgur.com/VHauMAs.png"/>
 </div> 
-# GamerRoom
-Aplicação de um "IMDB", onde os usuários avaliam e compartilham suas experiências nos jogos para ajudar outros jogadores a encontrarem novos jogos.
+  
+  ##
+  
+  <div align="center" style="display: flex"><br>
+  <img align="center" alt="HTML" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg">
+  <img align="center" alt="CSS" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg">
+  <img align="center" alt="Csharp" height="30" width="40" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg">
+  </div>
+   
