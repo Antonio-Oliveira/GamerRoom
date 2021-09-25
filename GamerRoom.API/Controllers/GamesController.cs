@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
 {
-
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
