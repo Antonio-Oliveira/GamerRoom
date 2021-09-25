@@ -11,7 +11,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
-{
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
