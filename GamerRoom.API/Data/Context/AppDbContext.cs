@@ -16,11 +16,12 @@ namespace GamerRoom.API.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new GameMapping());
+            modelBuilder.ApplyConfiguration(new UserGameMapping());
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<Game> Games { get; set; }
 
-        //public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<UserGame> ListUserGames { get; set; }
     }
 }
