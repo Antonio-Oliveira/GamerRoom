@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
 {
-    [EnableCors("CorsApi")]
-
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase

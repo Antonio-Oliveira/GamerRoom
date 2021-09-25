@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
 {
-    [EnableCors("CorsApi")]
-
- //   [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class GamesController : ControllerBase

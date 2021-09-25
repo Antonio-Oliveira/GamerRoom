@@ -128,14 +128,6 @@ namespace GamerRoom.API
             var tokenSettings = tokenSettingsSection.Get<TokenSettings>();
             var key = Encoding.ASCII.GetBytes(tokenSettings.Secret);
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(CorsPolicy,
-                builder => builder.WithOrigins("http://localhost:4200", "http://localhost:4200"))
-                .AllowAnyHeader();
-                .AllowAnyMethod();
-            });
-
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -186,7 +178,7 @@ namespace GamerRoom.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers()RequireCors(CorsPolicy);
+                endpoints.MapControllers();
             });
         }
     }
