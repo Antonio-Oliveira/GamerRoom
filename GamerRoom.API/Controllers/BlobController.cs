@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GamerRoom.API.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Auth;
 using System.Threading.Tasks;
 
 namespace GamerRoom.API.Controllers
 {
-    public class BlobController
+    public class BlobController : Controller
     {
         private readonly IConfiguration _configuration;
 
@@ -16,45 +16,44 @@ namespace GamerRoom.API.Controllers
         {
             _configuration = configuration;
         }
-    }
 
-    [HttpPost]
-    public async Task<Lanche> Save(IFormFile file, Lanche lanche)
-    {
-        var imagemUrl = await Upload(file, lanche.Nome, lanche.Categoria);
-        lanche.ImagemURL = imagemUrl;
-        return lanche;
-    }
 
-    private async Task<string> Upload(IFormFile file, string nome, Categoria categoria)
-    {
-        //Obtem as configurações blob do 'appsettings.json' e atribui as variaveis
-        var accountName = _configuration.GetSection("StorageConfiguration")["AccountName"];
-        //var accountName = _configuration["StorageConfiguration: AccountName"];
-        var accountKey = _configuration.GetSection("StorageConfiguration")["AccountKey"];
-        //var accountKey = _configuration["StorageConfiguration: AccountKey"];
-        var containerName = _configuration.GetSection("StorageConfiguration")["ContainerName"];
-        //var containerName = _configuration["StorageConfiguration: ContainerName"];
+        [HttpPost]
+        public async Task<Game> Save(IFormFile file, Game game)
+        {
+            var imageUri = await Upload(file, game.Name);
+            game.ImageUri = imageUri;
+            return game;
+        }
 
-        //Cria as credenciais de acesso do blob do Azure Storage e abre uma conexão com as APIs
-        var storageCredentials = new StorageCredentials(accountName, accountKey);
-        var storageAccount = new CloudStorageAccount(storageCredentials, true);
-        var blobAzure = storageAccount.CreateCloudBlobClient();
-        //Pega a referência do container que será feito o upload
-        var container = blobAzure.GetContainerReference(containerName);
+        private async Task<string> Upload(IFormFile file, string name)
+        {
+            //Obtem as configurações blob do 'appsettings.json' e atribui as variaveis
+            var accountName = _configuration.GetSection("StorageConfiguration")["AccountName"];
+            var accountKey = _configuration.GetSection("StorageConfiguration")["AccountKey"];
+            var containerName = _configuration.GetSection("StorageConfiguration")["ContainerName"];
 
-        //Atribui o nome do arquivo dentro do blob (podemos tratar com regex)
-        string nameProductF = "group-category_" + categoria.Nome.Replace(" ", "_").ToLower() + "/" + "image_product-"
-            + nome.Replace(" ", "_").ToLower() + ".jpg";
-        var blob = container.GetBlockBlobReference(nameProductF);
+            //Cria as credenciais de acesso do blob do Azure Storage e abre uma conexão com as APIs
+            var storageCredentials = new StorageCredentials(accountName, accountKey);
+            var storageAccount = new CloudStorageAccount(storageCredentials, true);
 
-        //Define o tipo do arquivo
-        blob.Properties.ContentType = file.ContentType;
-        //Realiza o upload do arquivo para o Blob
-        await blob.UploadFromStreamAsync(file.OpenReadStream());
+            var blobAzure = storageAccount.CreateCloudBlobClient();
 
-        //Obtem o URL do arquvivo no blob
-        return blob.SnapshotQualifiedStorageUri.PrimaryUri.ToString();
+            //Pega a referência do container que será feito o upload
+            var container = blobAzure.GetContainerReference(containerName);
 
+            //Atribui o nome do arquivo dentro do blob (podemos tratar com regex)
+            string nameFormatted = "game_images" + "/" + "image_game-" + name.Replace(" ", "_").ToLower() + ".jpg";
+            var blob = container.GetBlockBlobReference(nameFormatted);
+
+            //Define o tipo do arquivo
+            blob.Properties.ContentType = file.ContentType;
+
+            //Realiza o upload do arquivo para o Blob
+            await blob.UploadFromStreamAsync(file.OpenReadStream());
+
+            //Obtem o URL do arquvivo no blob
+            return blob.SnapshotQualifiedStorageUri.PrimaryUri.ToString();
+        }
     }
 }
