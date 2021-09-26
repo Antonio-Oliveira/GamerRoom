@@ -1,0 +1,10 @@
+.carousel-inner img {
+    width: 1000px;
+    height: 600px;
+    border-radius: 10px;
+}
+
+.carousel slide {
+    display: flex;
+    justify-content: center;
+}
