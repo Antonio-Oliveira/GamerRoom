@@ -93,9 +93,14 @@ namespace GamerRoom.API.Service
             if (game == null)
                 throw new Exception("Game não encontrado");
 
-            game.Rating = rating;
+            var updateUser = new UserGame()
+            {
+                GameId = game.GameId,
+                UserId = game.UserId,
+                Rating = rating    
+            };
 
-            await _userRepository.UpdateRating(game);
+            await _userRepository.UpdateRating(updateUser);
         }
 
     }
