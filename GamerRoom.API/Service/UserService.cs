@@ -90,18 +90,12 @@ namespace GamerRoom.API.Service
         {
             var game = await _userRepository.GetGame(idGame, userId);
 
-            if (game != null)
-                throw new Exception("Game já adicionado a lista");
+            if (game == null)
+                throw new Exception("Game não encontrado");
 
-            var updateGame = new UserGame()
-            {
-                UserId = userId,
-                Rating = rating,
-                GameId = idGame,
-                Id = game.Id
-            };
+            game.Rating = rating;
 
-            await _userRepository.UpdateRating(updateGame);
+            await _userRepository.UpdateRating(game);
         }
 
     }

@@ -53,5 +53,17 @@ namespace GamerRoom.API.Repositories
             _context.ListUserGames.Update(game);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<double> SumRatingGames(Guid idGame)
+        {
+            var sum = await _context.ListUserGames.Where(x => x.GameId == idGame).Select(p => p.Rating).SumAsync();
+            return sum;
+        }
+
+        public async Task<int> CountGamesById(Guid idGame)
+        {
+            var count = await _context.ListUserGames.Where(x => x.GameId == idGame).Select(p => p.Rating).CountAsync();
+            return count;
+        }
     }
 }

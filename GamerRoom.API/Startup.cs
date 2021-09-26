@@ -85,6 +85,7 @@ namespace GamerRoom.API
             #region Services
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUserService, UserService>();
             #endregion
 
             #region Repositories

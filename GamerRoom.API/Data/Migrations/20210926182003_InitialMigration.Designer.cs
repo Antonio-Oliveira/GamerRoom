@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerRoom.API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210924165417_InitialMigration")]
+    [Migration("20210926182003_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,9 @@ namespace GamerRoom.API.Data.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Genre");
 
+                    b.Property<string>("ImageUri")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Mode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -138,24 +141,19 @@ namespace GamerRoom.API.Data.Migrations
 
             modelBuilder.Entity("GamerRoom.API.Entities.UserGame", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("ID");
-
                     b.Property<Guid>("GameId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<double>("Rating")
                         .HasColumnType("float")
                         .HasColumnName("RATING");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("GameId", "UserId");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("TB_USERGAMES");
                 });
@@ -302,7 +300,7 @@ namespace GamerRoom.API.Data.Migrations
 
                     b.HasOne("GamerRoom.API.Entities.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("Id")
+                        .HasForeignKey("UserId")
                         .HasConstraintName("FK_USER_ID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
