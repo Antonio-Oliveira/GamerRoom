@@ -20,7 +20,7 @@ namespace GamerRoom.API.Repositories
 
         public async Task<UserGame> GetGame(Guid idGame, string userId)
         {
-            var game = await _context.ListUserGames.Include(x => x.Game).FirstOrDefaultAsync(x => x.GameId == idGame && x.UserId == userId);
+            var game = await _context.ListUserGames.AsNoTracking().Include(x => x.Game).FirstOrDefaultAsync(x => x.GameId == idGame && x.UserId == userId);
             return game;
         }
 
