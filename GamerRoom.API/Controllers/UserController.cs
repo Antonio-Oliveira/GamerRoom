@@ -23,7 +23,7 @@ namespace GamerRoom.API.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
+        [HttpGet("MyList")]
         public async Task<ActionResult> MyList()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -35,7 +35,7 @@ namespace GamerRoom.API.Controllers
             return Ok(myList);
         }
 
-        [HttpGet("{idGame:guid}")]
+        [HttpGet("MyGame/{idGame:guid}")]
         public async Task<ActionResult> GetGame([FromRoute] Guid idGame)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -47,7 +47,7 @@ namespace GamerRoom.API.Controllers
             return Ok(game);
         }
 
-        [HttpPost]
+        [HttpPost("MyGame")]
         public async Task<ActionResult> AddGame([FromBody] GameListInputModel gameListIM)
         {
             try
@@ -62,7 +62,7 @@ namespace GamerRoom.API.Controllers
             }
         }
 
-        [HttpPatch("{idGame:guid}/rating/{rating:double}")]
+        [HttpPatch("MyGame/{idGame:guid}/rating/{rating:double}")]
         public async Task<ActionResult> UpdateRating([FromRoute] Guid idGame, [FromRoute] double rating)
         {
             try
@@ -77,7 +77,7 @@ namespace GamerRoom.API.Controllers
             }
         }
 
-        [HttpDelete("{idGame:guid}")]
+        [HttpDelete("MyGame/{idGame:guid}")]
         public async Task<ActionResult> RemoveGame([FromRoute] Guid idGame)
         {
             try

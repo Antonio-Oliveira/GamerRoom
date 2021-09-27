@@ -1,12 +1,15 @@
+using GamerRoom.web.mvc.Service.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace GamerRoom.web.mvc
@@ -23,6 +26,20 @@ namespace GamerRoom.web.mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            #region Refit
+            var clientHandler = new HttpClientHandler 
+            {
+                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErros) => { return true; }
+            };
+
+            services.AddRefitClient<IGameService>()
+                .ConfigureHttpClient(c => 
+                {
+                    c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
+                }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
+            #endregion
+
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
         }

@@ -1,0 +1,21 @@
+#game {
+    width: 1000px;
+    display: flex;
+    margin: 0 auto;
+}
+
+#editor {
+    display: grid;
+    justify-content: center;
+}
+
+.escolha {
+    border: solid 1px #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 1px;
+}
+
+p {
+    padding-left: 35px;
+}

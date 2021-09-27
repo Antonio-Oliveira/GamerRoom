@@ -23,6 +23,21 @@ namespace GamerRoom.web.mvc.Controllers
             return View();
         }
 
+        public IActionResult Favorites()
+        {
+            return View();
+        }
+
+        public IActionResult Gamelist()
+        {
+            return View();
+        }
+
+        public IActionResult EditorPick() 
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
