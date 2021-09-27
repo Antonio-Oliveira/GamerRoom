@@ -18,12 +18,13 @@ namespace GamerRoom.web.mvc.Controllers
             _authService = authService;
         }
 
-        
+        /*
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+        */
         
 
 
@@ -59,12 +60,13 @@ namespace GamerRoom.web.mvc.Controllers
                 registerInputModel = new RegisterInputModel()
                 {
                     Email = "tony@gmail.com",
+                    UserName = "Stain",
                     Password = "Tonyn.2001",
-                    ConfirmPassword = "Tonyn.2001",
-                    UserName = "Stain"
+                    ConfirmPassword = "Tonyn.2001"
                 };
 
                 var user = await _authService.Register(registerInputModel);
+
                 return RedirectToAction("Index", "Home");
             }
             catch (ApiException err)
