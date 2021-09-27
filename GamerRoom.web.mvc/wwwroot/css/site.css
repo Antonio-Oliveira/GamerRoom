@@ -1,5 +1,6 @@
 ﻿.background {
     background-image: url("/media/background.png");
+    background-attachment: fixed;
 }
 
 header {

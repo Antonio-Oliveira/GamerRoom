@@ -5,29 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GamerRoom</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    @await RenderSectionAsync("Links", required: false)
+
+
 </head>
 <body class="background">
     <header>
-       <div> 
-       <a href="">
-        <img class="logo" src="~/media/logo.png" alt="logo">
-       </a>
-       </div>
+        <div>
+            <a href="">
+                <img class="logo" src="~/media/logo.png" alt="logo">
+            </a>
+        </div>
 
-       <div class="menu">
-           <ul>
-               <li><a asp-controller="Home" asp-action="Index">HOME</a></li>
-               <li><a asp-controller="Home" asp-action="Gamelist">GAME LIST</a></li>
-               <li><a asp-controller="Home" asp-action="Favorites">MY FAVORITES LIST</a></li>
-               <li><a href="">EDITOR'S PICK</a></li>
-           </ul>
-        </div> 
+        <div class="menu">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">HOME</a></li>
+                <li><a asp-controller="Home" asp-action="Gamelist">GAME LIST</a></li>
+                <li><a asp-controller="Home" asp-action="Favorites">MY FAVORITES LIST</a></li>
+                <li><a href="">EDITOR'S PICK</a></li>
+            </ul>
+        </div>
 
-        <div class="user"> 
+        <div class="user">
             <img class="user" src="~/media/icons/user.svg" alt="user">
         </div>
     </header>
@@ -39,50 +43,51 @@
     </div>
 
     <footer>
-       <div> 
-       <hr>
-       </div>
-
-<div class="developedby"> 
-<p> Developed by </p>
-</div>
-
-    <div class="devs">
-       <div class="dev"> 
-       <img class="dev" src="~/media/dev1.png" alt="dev">
-       <a href="https://github.com/alizgms"> Alice </a>
-       </div>
-        <div class="dev"> 
-       <img class="dev" src="~/media/dev2.png" alt="dev">
-       <a href="https://github.com/Meoliv"> Mel </a>
-       </div>
-        <div class="dev"> 
-       <img class="dev" src="~/media/dev3.png" alt="dev">
-       <a href="https://github.com/thiagohsiq"> Thiago </a>
-       </div>
-        <div class="dev"> 
-       <img class="dev" src="~/media/dev4.png" alt="dev">
-       <a href="https://github.com/Eivrens"> Everton </a>
-       </div>
-        <div class="dev"> 
-       <img class="dev" src="~/media/dev5.png" alt="dev">
-       <a href="https://github.com/Antonio-Oliveira"> Tony </a>
-       </div>
-       </div>
-
-        <div class="media">
-         <img class="socialmedia" src="~/media/icons/facebook.svg" alt="socialmedia">
-         <img class="socialmedia" src="~/media/icons/instagram.svg" alt="socialmedia">
-         <img class="socialmedia" src="~/media/icons/twitch.svg" alt="socialmedia">
-         <img class="socialmedia" src="~/media/icons/twitter.svg" alt="socialmedia">
-         <img class="socialmedia" src="~/media/icons/youtube.svg" alt="socialmedia">
+        <div>
+            <hr>
         </div>
 
-            <div class="copyright"> 
-            <a class="copyright" href=""> © 2021 by GamerRoom, Inc. </a>
+        <div class="developedby">
+            <p> Developed by </p>
+        </div>
+
+        <div class="devs">
+            <div class="dev">
+                <img class="dev" src="~/media/dev1.png" alt="dev">
+                <a href="https://github.com/alizgms"> Alice </a>
             </div>
-        
+            <div class="dev">
+                <img class="dev" src="~/media/dev2.png" alt="dev">
+                <a href="https://github.com/Meoliv"> Mel </a>
+            </div>
+            <div class="dev">
+                <img class="dev" src="~/media/dev3.png" alt="dev">
+                <a href="https://github.com/thiagohsiq"> Thiago </a>
+            </div>
+            <div class="dev">
+                <img class="dev" src="~/media/dev4.png" alt="dev">
+                <a href="https://github.com/Eivrens"> Everton </a>
+            </div>
+            <div class="dev">
+                <img class="dev" src="~/media/dev5.png" alt="dev">
+                <a href="https://github.com/Antonio-Oliveira"> Tony </a>
+            </div>
+        </div>
+
+        <div class="media">
+            <img class="socialmedia" src="~/media/icons/facebook.svg" alt="socialmedia">
+            <img class="socialmedia" src="~/media/icons/instagram.svg" alt="socialmedia">
+            <img class="socialmedia" src="~/media/icons/twitch.svg" alt="socialmedia">
+            <img class="socialmedia" src="~/media/icons/twitter.svg" alt="socialmedia">
+            <img class="socialmedia" src="~/media/icons/youtube.svg" alt="socialmedia">
+        </div>
+
+        <div class="copyright">
+            <a class="copyright" href=""> © 2021 by GamerRoom, Inc. </a>
+        </div>
+
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

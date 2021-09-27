@@ -10,11 +10,10 @@ namespace GamerRoom.web.mvc.Service.Interfaces
     public interface IGameService
     {
         [Get("/api/Games")]
+        //[Headers("Authorization: Bearer")]
         Task<List<GameViewModel>> ListGames();
 
-        [Get("/api​/Games​/{idGame}")]
-        Task<List<GameViewModel>> GetGame(Guid idGame);
-
-
+        [Get("/api/Games/{idGame}")]
+        Task<GameViewModel> GetGame(Guid idGame);
     }
 }

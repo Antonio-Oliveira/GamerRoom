@@ -1,8 +1,12 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
 }
 
-<head>
+
+@section Links
+{
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
           integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
           crossorigin="anonymous" />
@@ -11,7 +15,7 @@
           integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
           crossorigin="anonymous" />
     <link rel="stylesheet" href="~/css/index.css" />
-</head>
+}
 
 <!--Carrossel-->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -39,309 +43,45 @@
     </a>
 </div>
 <!-- fim do carrossel -->
-<!-- Top favorites carrossel" -->
-<div class="carrossel-jogos">
+
+@if (Model != null && (Model.TopTen.Count > 0 && Model.General.Count() > 0))
+{
+    <!-- Top favorites carrossel" -->
     <h2>Top Favorites</h2>
     <h6>This week’s top 10</h6>
-    <div class="owl-carousel owl-theme">
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
+    @await Html.PartialAsync("_Carousel", Model.TopTen)
 
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
+    <h2>All Games</h2>
+    <h6>Alphabetical Order</h6>
+    <!-- General carrossel -->
+    @await Html.PartialAsync("_Carousel", Model.General)
 
-        </div>
+}
+else if (Model == null)
+{
+    <h2> We'll be back soon </h2>
+}
+else
+{
+    <h2> No games have been registered so far. </h2>
+}
 
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
+    <script src="https://kit.fontawesome.com/e288b4d2a5.js" crossorigin="anonymous"></script>
+    <script src="js/OwlCarousel/jquery.min.js"></script>
+    <script src="js/OwlCarousel/owl.carousel.min.js"></script>
+    <script src="js/OwlCarousel/main.js"></script>
+}
 
-        </div>
 
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Top favorites carrossel" -->
-<!-- You liked carrossel" -->
-<div class="carrossel-jogos">
-    <h2>You liked</h2>
-    <h6>Games from your favorites list</h6>
-    <div class="owl-carousel owl-theme">
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- You liked -->
-<!-- Editor's pick carrossel" -->
-<div class="carrossel-jogos">
-    <h2>Editor's pick</h2>
-    <h6>Games liked by editor's</h6>
-    <div class="owl-carousel owl-theme">
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-
-        <div class="item">
-            <img src="~/media/jogos/paladins.png">
-
-            <div class="card">
-                <li class="title" id="title">
-                    <h5>Paladins </h5>
-                </li>
-                <li class="nota"> <img src="~/media/icons/star.svg" id="estrela" alt="star"> &nbsp; 4,5 </li>
-                <li class="like"> <img src="~/media/icons/plus.svg" id="estrela" alt="like"> &nbsp; Favorite </li>
-                <li class="trailer">
-                    <a href="https://www.youtube.com/watch?v=dEwEC2MKgeQ">
-                        <img src="~/media/icons/play.svg" id="estrela" alt="play">
-                    </a> &nbsp; Play trailer
-                </li>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Editor's pick -->
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
-<script src="https://kit.fontawesome.com/e288b4d2a5.js" crossorigin="anonymous"></script>
-<script src="js/OwlCarousel/jquery.min.js"></script>
-<script src="js/OwlCarousel/owl.carousel.min.js"></script>
-<script src="js/OwlCarousel/main.js"></script>
