@@ -4,10 +4,5 @@
     ViewData["Title"] = "Home Page";
 }
 
-@foreach (var item in Model)
-{
-    <div>
-        <span>| @item.Name | </span>
-        <span> <a asp-controller="Game" asp-action="GetGame" asp-route-idGame="@item.Id"> link </a> </span>
-    </div>
-}
+@await Html.PartialAsync("_Carousel", Model);
+

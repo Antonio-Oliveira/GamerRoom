@@ -21,7 +21,7 @@ namespace GamerRoom.web.mvc.Controllers
 
         [HttpGet]
         public async Task<ActionResult<GameViewModel>> Index()
-        
+
         {
             try
             {
@@ -33,7 +33,7 @@ namespace GamerRoom.web.mvc.Controllers
                 ModelState.AddModelError(" ", err.Message);
                 return View();
             }
-            catch (Exception err) 
+            catch (Exception err)
             {
                 ModelState.AddModelError("", err.Message);
                 return View();
@@ -50,7 +50,7 @@ namespace GamerRoom.web.mvc.Controllers
             }
             catch (ApiException err)
             {
-                ModelState.AddModelError(" ", err.Message);
+                ModelState.AddModelError(" ", err.StatusCode + " " + err.Message);
                 return View();
             }
             catch (Exception err)

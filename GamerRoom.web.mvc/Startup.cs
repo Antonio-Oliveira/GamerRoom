@@ -1,4 +1,6 @@
+using GamerRoom.web.mvc.Handlers;
 using GamerRoom.web.mvc.Service.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,18 +30,26 @@ namespace GamerRoom.web.mvc
         {
 
             #region Refit
-            var clientHandler = new HttpClientHandler 
-            {
-                ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErros) => { return true; }
-            };
 
-            services.AddRefitClient<IGameService>()
-                .ConfigureHttpClient(c => 
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            services.AddTransient<BearerTokenMessageHandler>();
+
+            services
+                .AddRefitClient<IGameService>()
+                .AddHttpMessageHandler<BearerTokenMessageHandler>()
+                .ConfigureHttpClient(c =>
                 {
                     c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
                 }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
+
             #endregion
 
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
+
+            services.AddHttpContextAccessor();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
         }
@@ -57,11 +67,14 @@ namespace GamerRoom.web.mvc
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
