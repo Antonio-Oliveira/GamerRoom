@@ -1,5 +1,5 @@
-﻿using GamerRoom.web.mvc.Dtos.ViewModel;
-using GamerRoom.web.mvc.Models;
+﻿using GamerRoom.web.mvc.Models;
+using GamerRoom.web.mvc.Models.Home;
 using GamerRoom.web.mvc.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

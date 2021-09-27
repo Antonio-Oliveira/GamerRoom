@@ -1,6 +1,6 @@
 using System;
 
-namespace GamerRoom.web.mvc.Models
+namespace GamerRoom.web.mvc.Models.Home
 {
     public class ErrorViewModel
     {
