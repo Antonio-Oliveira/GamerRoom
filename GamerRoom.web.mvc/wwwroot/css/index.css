@@ -1,0 +1,44 @@
+.carousel-inner img {
+    width: 1000px;
+    height: 600px;
+    border-radius: 10px;
+}
+
+.carousel slide {
+    display: flex;
+    justify-content: center;
+}
+
+.carrossel-jogos {
+    margin-bottom: 50px;
+}
+
+#carouselExampleControls {
+    margin-bottom: 50px;
+}
+
+h6 {
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+.card {
+    padding-left: 10px;
+    background-color: #181818;
+}
+
+li {
+    list-style-type: none;
+    display: flex;
+}
+
+#estrela {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+h5 {
+    font-weight: 300;
+}

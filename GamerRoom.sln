@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerRoom.API", "GamerRoom.API\GamerRoom.API.csproj", "{425C34A6-7372-4F3E-921F-D452213718D2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{63E7DF30-3944-45E6-ACD1-C7C7FB004621}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamerRoom.web.mvc", "GamerRoom.web.mvc\GamerRoom.web.mvc.csproj", "{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerRoom.web.mvc", "GamerRoom.web.mvc\GamerRoom.web.mvc.csproj", "{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerRoom.API", "..\..\..\Desktop\GamerRoom-gr.v1.tony\GamerRoom.API\GamerRoom.API.csproj", "{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,14 +18,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{425C34A6-7372-4F3E-921F-D452213718D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{425C34A6-7372-4F3E-921F-D452213718D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{425C34A6-7372-4F3E-921F-D452213718D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{425C34A6-7372-4F3E-921F-D452213718D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

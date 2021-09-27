@@ -21,31 +21,37 @@ namespace GamerRoom.API.Service
             _userRepository = userRepository;
         }
 
-        public async Task Delete(Guid idGame)
-        {
-            var game = await _gameRepository.GetGameById(idGame);
-
-            if (game == null)
-                throw new Exception("Game não encontrado");
-
-            await _gameRepository.Delete(game);
-        }
-
         public async Task<List<GameViewModel>> Get()
         {
             var games = await _gameRepository.Get();
+            var gamesVM = new List<GameViewModel>();
 
-            return games.Select(games => new GameViewModel
+            foreach (var game in games)
             {
-                Id = games.Id,
-                Name = games.Name,
-                Description = games.Description,
-                Developer = games.Developer,
-                Publisher = games.Publisher,
-                Genre = games.Genre,
-                Platform = games.Platform,
-                Mode = games.Mode
-            }).ToList();
+                var sumRating = await _userRepository.SumRatingGames(game.Id);
+                var count = await _userRepository.CountGamesById(game.Id);
+                var calcRating = 0.0;
+
+                if (sumRating != 0 && count != 0)
+                    calcRating = sumRating / count;
+                
+
+                gamesVM.Add(new GameViewModel() 
+                {
+                    Id = game.Id,
+                    Name = game.Name,
+                    Description = game.Description,
+                    Developer = game.Developer,
+                    Publisher = game.Publisher,
+                    Genre = game.Genre,
+                    Platform = game.Platform,
+                    Mode = game.Mode,
+                    ReleaseDate = game.ReleaseDate,
+                    Rating = calcRating
+                });
+            }
+
+            return gamesVM;
         }
 
         public async Task<GameViewModel> GetGameById(Guid idGame)
@@ -54,6 +60,13 @@ namespace GamerRoom.API.Service
 
             if (game == null)
                 return null;
+
+            var sumRating = await _userRepository.SumRatingGames(game.Id);
+            var count = await _userRepository.CountGamesById(game.Id);
+            var calcRating = 0.0;
+
+            if (sumRating != 0 && count != 0)
+                calcRating = sumRating / count;
 
             return new GameViewModel()
             {
@@ -64,7 +77,9 @@ namespace GamerRoom.API.Service
                 Publisher = game.Publisher,
                 Platform = game.Platform,
                 Genre = game.Genre,
-                Mode = game.Mode
+                Mode = game.Mode,
+                ReleaseDate = game.ReleaseDate,
+                Rating = calcRating
             };
         }
 
@@ -134,6 +149,16 @@ namespace GamerRoom.API.Service
                 Genre = gameUpdate.Genre,
                 Mode = gameUpdate.Mode
             };
+        }
+
+        public async Task Delete(Guid idGame)
+        {
+            var game = await _gameRepository.GetGameById(idGame);
+
+            if (game == null)
+                throw new Exception("Game não encontrado");
+
+            await _gameRepository.Delete(game);
         }
     }
 }

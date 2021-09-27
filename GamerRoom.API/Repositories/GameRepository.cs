@@ -32,13 +32,13 @@ namespace GamerRoom.API.Repositories
 
         public async Task<Game> GetGameById(Guid idGame)
         {
-            var game = await _context.Games.FirstOrDefaultAsync(games => games.Id == idGame);
+            var game = await _context.Games.AsNoTracking().FirstOrDefaultAsync(games => games.Id == idGame);
             return game;
         }
 
         public async Task<Game> GetGameByName(string name)
         {
-            var game = await _context.Games.FirstOrDefaultAsync(games => games.Name == name);
+            var game = await _context.Games.AsNoTracking().FirstOrDefaultAsync(games => games.Name == name);
             return game;
         }
 

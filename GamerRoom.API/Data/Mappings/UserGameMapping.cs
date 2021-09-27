@@ -15,11 +15,7 @@ namespace GamerRoom.API.Data.Mappings
             builder.ToTable("TB_USERGAMES");
 
             // PROPS
-            builder.HasKey(p => p.Id);
-
-            builder.Property(p => p.Id)
-                .HasColumnName("ID")
-                .ValueGeneratedOnAdd();
+            builder.HasKey(p => new {p.GameId, p.UserId});
 
             builder.Property(p => p.Rating)
                 .IsRequired()
@@ -27,7 +23,7 @@ namespace GamerRoom.API.Data.Mappings
 
             builder.HasOne(p => p.User)
                 .WithMany()
-                .HasForeignKey(fk => fk.Id)
+                .HasForeignKey(fk => fk.UserId)
                 .HasConstraintName("FK_USER_ID");
 
             builder.HasOne(p => p.Game)

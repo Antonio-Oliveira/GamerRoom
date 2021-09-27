@@ -58,7 +58,8 @@ namespace GamerRoom.API.Data.Migrations
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Mode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ImageUri = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -175,14 +176,13 @@ namespace GamerRoom.API.Data.Migrations
                 name: "TB_USERGAMES",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RATING = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TB_USERGAMES", x => x.ID);
+                    table.PrimaryKey("PK_TB_USERGAMES", x => new { x.GameId, x.UserId });
                     table.ForeignKey(
                         name: "FK_GAME_ID",
                         column: x => x.GameId,
@@ -191,7 +191,7 @@ namespace GamerRoom.API.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_USER_ID",
-                        column: x => x.ID,
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -237,9 +237,9 @@ namespace GamerRoom.API.Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_USERGAMES_GameId",
+                name: "IX_TB_USERGAMES_UserId",
                 table: "TB_USERGAMES",
-                column: "GameId");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

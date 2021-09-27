@@ -14,6 +14,10 @@ namespace GamerRoom.API.Repositories.Interface
 
         Task<UserGame> GetGame(Guid idGame, string userId);
 
+        Task<double> SumRatingGames(Guid idGame);
+
+        Task<int> CountGamesById(Guid idGame);
+
         Task InsertGame(UserGame game);
 
         Task UpdateRating(UserGame game);
