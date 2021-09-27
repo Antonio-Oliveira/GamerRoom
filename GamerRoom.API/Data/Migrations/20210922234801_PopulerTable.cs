@@ -1,0 +1,36 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace GamerRoom.API.Data.Migrations
+{
+    public partial class PopulerTable : Migration
+    {
+        protected override void Up(MigrationBuilder mb)
+        {   //Fortnite
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('aaf33b90-1e24-47ae-a4a6-c22d30fbce54', 'Fortnite', 'Fortnite is a survival game where 100 players fight against each other in player versus player combat to be the last one standing. It is a fast-paced, action-packed game, not unlike The Hunger Games, where strategic thinking is a must in order to survive.', 'Epic Games', 'Epic Games', 'Battle Royale', 'PC; PlayStation 4; Xbox One; Nitendo Switch; Android;', 'Multiplayer', '07/21/2017', 'link-do-azure-storage-blob')");
+            //Among Us
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('4c5afb21-e651-4110-8b35-157870a1527d', 'Among Us', 'Among Us is a multiplayer game where between four and 10 players are dropped onto an alien spaceship. Each player is designated a private role as a crewmate or impostor.', 'InnerSloth', 'InnerSloth', 'Survival', 'PC; PlayStation 4; Xbox One; Nitendo Switch; Android; IOS;', 'Multiplayer', '06/15/2018', 'link-do-azure-storage-blob')");
+            //God of War
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('d01106d4-e828-4f35-a4cc-ae534f220f14', 'God of War', 'God of War is an action-adventure game franchise created by David Jaffe at Sony's Santa Monica Studio. It began in 2005 on the PlayStation 2 video game console, and has become a flagship title for the PlayStation brand, consisting of eight games across multiple platforms with a ninth currently in development.', 'Santa Monica Studio', 'Sony Interactive Entertainment', 'Action-adventure', 'PlayStation 4;', 'Single Player', '04/20/2018', 'link-do-azure-storage-blob')");
+            //Paladins
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('6aa3cdb5-1b44-4523-83d9-54d1f1d740a8', 'Paladins', 'Paladins is a team-based first-person shooter that focuses on two groups of five players each, who compete for combat-based goals. The game is set in colorful sci-fi fantasy maps, where each player chooses a champion that cannot be repeated in the same team and cannot be changed in the match. Each champion has their own weapons, skills and fighting style; in addition, they can be enhanced and personalized from a card and skin system.', 'Evil Mojo Games', 'Hi-Rez Studios', 'Hero Shooter', 'PC; PlayStation 4; Xbox One; Nitendo Switch;', 'Multiplayer', '09/16/2016', 'link-do-azure-storage-blob')");
+            //Euro Truck Simulator 2
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('b854b283-f4c7-4c2a-9596-5bcadb76a8e9', 'Euro Truck Simulator 2', 'Euro Truck Simulator 2 gives you the chance to become a real truck driver from the comfort of your home! Featuring licensed trucks with countless customization options and advanced driving physics, the game delivers an unparalleled driving experience which has put it in the spot of the most popular truck driving simulator on the market.', 'SCS Software', 'SCS Software', 'Simulator', 'PC;', 'Single Player', '10/18/2012', 'link-do-azure-storage-blob')");
+            //Genshin Impact
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('3e2d34d9-2171-4c6a-9bab-0b52cb44163c', 'Genshin Impact', 'Genshin Impact is an open-world action role-playing game that allows the player to control one of four interchangeable characters in a party. Switching between characters can be done quickly during combat, allowing the player to use several different combinations of skills and attacks.', 'miHoYo', 'miHoYo', 'RPG', 'PC; PlayStation 4; Xbox One; Nitendo Switch; Android; IOS', 'Single and Multiplayer', '09/28/2020', 'link-do-azure-storage-blob')");
+            //Amnesia: A Machine for Pigs
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('6e31c499-7037-4384-9ae6-d0d8a94face0', 'Amnesia: A Machine for Pigs', 'The game features several interlocking storylines. Some take place in the past, some in the present, and some are overtly real while some may be imagined. Set in London on New Year's Eve, 1899, the game's protagonist is Oswald Mandus, a wealthy industrialist and butcher who is implied to be the great grand-nephew of Daniel, the protagonist of Amnesia: The Dark Descent.', 'The Chinese Room', 'Frictional Games', 'Survival Horror', 'PC; PlayStation 4; Xbox One; Nitendo Switch;', 'Single Player', '09/10/2013', 'link-do-azure-storage-blob')");
+            //This War of Mine
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('c1d9e6bb-75a7-4bbb-8b27-e4034601080d', 'This War of Mine', This War of Mine is a survival-themed strategy game where the player controls a group of civilian survivors in a makeshift-damaged house in the besieged fictional city of Pogoren, Graznavia. The player starts off with one to four survivors whose actions the player can affect.', '11 bit Studios', '11 bit Studios', 'Survival', 'PC; PlayStation 4; Xbox One; Nitendo Switch; Android; IOS', 'Single Player', '11/14/2014', 'link-do-azure-storage-blob')");
+            //First Class Trouble
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('25153b71-c9b8-4242-a630-076d72a6274d', 'First Class Trouble', 'First Class Trouble is a party game where players must work together and against each other to survive a disaster. The goal is to shut down a deadly A.I. Some players are impostors, secretly playing as human-looking killer robots intent on betraying the other players.', 'Invisible Walls', 'Versus Evil', 'Survival', 'PC; PlayStation 4; PlayStation 5; Xbox One; Xbox Series X; Nitendo Switch;', 'Multiplayer', '04/08/2021', 'link-do-azure-storage-blob')");
+            //Cuphead
+            mb.Sql("INSERT INTO TB_GAMES(ID, Name, Description, Developer, Publisher, Genre, Platform, Mode, ReleaseDate, ImageUri) VALUES('59a6f579-30cb-4863-95d4-caaeb42fcf01', 'Cuphead', 'Cuphead features one or two players taking control of its titular protagonist and his brother Mugman to fight through several levels, that culminate in boss fights, in order to repay their debt to the devil.', 'Studio MDHR Entertainment', 'Studio MDHR Entertainment', 'Shoot \'Em Up', 'PC; PlayStation 4; Xbox One; Nitendo Switch;', 'Single and Multiplayer', '09/29/2017', 'link-do-azure-storage-blob')");
+
+        }
+
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.Sql("DELETE FROM TB_GAMES");
+        }
+    }
+}
