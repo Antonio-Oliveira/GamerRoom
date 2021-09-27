@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GamerRoom.web.mvc.Dtos.ViewModel
+namespace GamerRoom.web.mvc.Models.Game
 {
     public class GameViewModel
     {
@@ -24,6 +24,9 @@ namespace GamerRoom.web.mvc.Dtos.ViewModel
         public string Mode { get; set; }
 
         public DateTime ReleaseDate { get; set; }
+
+        public string ImageUri { get; set; }
+        public string TrailerUri { get; set; }
 
         public double Rating { get; set; }
     }

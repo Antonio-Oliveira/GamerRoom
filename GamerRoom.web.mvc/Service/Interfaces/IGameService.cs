@@ -1,4 +1,4 @@
-﻿using GamerRoom.web.mvc.Dtos.ViewModel;
+﻿using GamerRoom.web.mvc.Models.Game;
 using Refit;
 using System;
 using System.Collections.Generic;

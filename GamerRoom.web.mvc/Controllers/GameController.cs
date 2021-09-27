@@ -1,4 +1,4 @@
-﻿using GamerRoom.web.mvc.Dtos.ViewModel;
+﻿using GamerRoom.web.mvc.Models.Game;
 using GamerRoom.web.mvc.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
