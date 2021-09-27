@@ -10,10 +10,10 @@ namespace GamerRoom.web.mvc.Service.Interfaces
 {
     public interface IAuthService
     {
-        [Get("/api/Auth/Login")]
+        [Post("/api/Auth/Login")]
         Task<ActionResult> Login(LoginInputModel loginInputModel);
 
-        [Get("/api​/Auth​/Register")]
+        [Post("/api​/Auth​/Register")]
         Task<ActionResult> Register(RegisterInputModel registerInputModel);
     }
 }
