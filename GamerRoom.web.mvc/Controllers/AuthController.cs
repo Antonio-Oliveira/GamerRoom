@@ -18,19 +18,25 @@ namespace GamerRoom.web.mvc.Controllers
             _authService = authService;
         }
 
-
+        
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
+        
 
 
-        [HttpPost]
         public async Task<ActionResult> Login(LoginInputModel loginInputModel)
         {
             try
             {
+                loginInputModel = new LoginInputModel()
+                {
+                    Email = "teste@gmail.com",
+                    Password = "Tonyn.2001"
+                };
+
                 var user = await _authService.Login(loginInputModel);
                 return RedirectToAction("Index","Home");
             }
@@ -46,9 +52,31 @@ namespace GamerRoom.web.mvc.Controllers
             }
         }
 
-        public IActionResult Register()
+        public async Task<IActionResult> Register(RegisterInputModel registerInputModel)
         {
-            return View();
+            try
+            {
+                registerInputModel = new RegisterInputModel()
+                {
+                    Email = "tony@gmail.com",
+                    Password = "Tonyn.2001",
+                    ConfirmPassword = "Tonyn.2001",
+                    UserName = "Stain"
+                };
+
+                var user = await _authService.Register(registerInputModel);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (ApiException err)
+            {
+                ModelState.AddModelError(" ", err.Message);
+                return View();
+            }
+            catch (Exception err)
+            {
+                ModelState.AddModelError("", err.Message);
+                return View();
+            }
         }
     }
 }

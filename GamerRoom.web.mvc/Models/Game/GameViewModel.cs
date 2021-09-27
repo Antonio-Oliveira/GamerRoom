@@ -26,6 +26,7 @@ namespace GamerRoom.web.mvc.Models.Game
         public DateTime ReleaseDate { get; set; }
 
         public string ImageUri { get; set; }
+
         public string TrailerUri { get; set; }
 
         public double Rating { get; set; }

@@ -11,9 +11,9 @@ namespace GamerRoom.web.mvc.Service.Interfaces
     public interface IAuthService
     {
         [Post("/api/Auth/Login")]
-        Task<ActionResult> Login(LoginInputModel loginInputModel);
+        Task<UserViewModel> Login(LoginInputModel loginInputModel);
 
-        [Post("/api​/Auth​/Register")]
-        Task<ActionResult> Register(RegisterInputModel registerInputModel);
+        [Post("/api​/Auth/Register")]
+        Task<UserViewModel> Register(RegisterInputModel registerInputModel);
     }
 }
