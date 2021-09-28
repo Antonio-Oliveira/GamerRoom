@@ -7,22 +7,17 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Oswald', sans-serif;
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #ffff;
+    background-image: url("../media/background.png");
 }
 
 .content {
-    background-color: black;
-    border-radius: 15px;
-    width: 960px;
-    height: 50%;
     justify-content: space-between;
     align-items: center;
     position: relative;
@@ -61,10 +56,13 @@ body {
 
 .description-second {
     color: #fff;
+    font-size: 25px;
+    position: relative;
+    top: -172px;
 }
 
 .btn {
-    border-radius: 15px;
+    border-radius: 5px;
     text-transform: uppercase;
     color: #fff;
     font-size: 10px;
@@ -84,13 +82,14 @@ body {
 }
 
 .btn-second {
-    background-color: black;
+    background-color: #fff;
     transition: background-color .5s;
+    color: black;
 }
 
     .btn-second:hover {
-        background-color: #fff;
-        color: black;
+        background-color: black;
+        color: #fff;
     }
 
 .first-content {
@@ -103,15 +102,25 @@ body {
 
 .first-column {
     text-align: center;
-    width: 40%;
-    z-index: 10;
+    width: 50%;
+    float: left;
+    height: 100%;
 }
 
 .second-column {
-    width: 60%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.logo-register {
+    position: relative;
+    top: -300px;
+}
+
+.register {
+    display: contents;
 }
 
 
@@ -119,6 +128,8 @@ body {
     display: flex;
     flex-direction: column;
     width: 55%;
+    position: relative;
+    top: -128px;
 }
 
     .form input {
@@ -275,100 +286,4 @@ body {
         left: 110px;
         z-index: -1;
     }
-}
-
-
-/ANIMAÇÃO CSS/
-
-@keyframes slidein {
-    from
-
-{
-    left: 0;
-    width: 40%;
-}
-
-25% {
-    left: 5%;
-    width: 50%;
-}
-
-50% {
-    left: 25%;
-    width: 60%;
-}
-
-75% {
-    left: 45%;
-    width: 50%;
-}
-
-to {
-    left: 60%;
-    width: 40%;
-}
-
-}
-
-@keyframes slideout {
-
-    from {
-        left: 60%;
-        width: 40%;
-    }
-
-    25% {
-        left: 45%;
-        width: 50%;
-    }
-
-    50% {
-        left: 25%;
-        width: 60%;
-    }
-
-    75% {
-        left: 5%;
-        width: 50%;
-    }
-
-    to {
-        left: 0;
-        width: 40%;
-    }
-}
-
-/VERSÃO MOBILE/
-@media screen and (max-width: 1040px) {
-    .content
-
-{
-    width: 100%;
-    height: 100%;
-}
-
-.content::before {
-    width: 100%;
-    height: 40%;
-    top: 0;
-    border-radius: 0;
-}
-
-.first-content, .second-content {
-    flex-direction: column;
-    justify-content: space-around;
-}
-
-.first-column, .second-column {
-    width: 100%;
-}
-
-.sign-in-js .content::before {
-    top: 60%;
-    left: 0;
-    border-radius: 0;
-}
-
-.form {
-    width: 90%;
 }
