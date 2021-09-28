@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerRoom.web.mvc", "GamerRoom.web.mvc\GamerRoom.web.mvc.csproj", "{3FEE07E5-1EE9-49AD-B942-CF80556DFC70}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerRoom.API", "..\..\..\Desktop\GamerRoom-gr.v1.tony\GamerRoom.API\GamerRoom.API.csproj", "{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GamerRoom.API", "GamerRoom.API\GamerRoom.API.csproj", "{B20FF2E7-D36B-40E8-9D7F-006A0F1DC82F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
