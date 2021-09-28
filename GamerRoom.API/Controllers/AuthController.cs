@@ -1,4 +1,5 @@
 ﻿using GamerRoom.API.Dtos.InputModel;
+using GamerRoom.API.Dtos.ViewModel;
 using GamerRoom.API.Entities;
 using GamerRoom.API.Service.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +25,7 @@ namespace GamerRoom.API.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegisterInputModel registerIM)
+        public async Task<ActionResult<UserViewModel>> Register(RegisterInputModel registerIM)
         {
             try
             {
@@ -34,7 +35,13 @@ namespace GamerRoom.API.Controllers
                 await _authService.Register(registerIM);
                 var token = await _authService.GerarToken(registerIM.Email);
 
-                return Created("", token);
+                var userVM = new UserViewModel()
+                {
+                    Email = registerIM.Email,
+                    Token = token,
+                };
+
+                return Ok(userVM);
             }
             catch (Exception err)
             {
@@ -44,7 +51,7 @@ namespace GamerRoom.API.Controllers
 
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginInputModel loginIM)
+        public async Task<ActionResult<UserViewModel>> Login(LoginInputModel loginIM)
         {
             try
             {
@@ -54,7 +61,13 @@ namespace GamerRoom.API.Controllers
                 await _authService.Login(loginIM);
                 var token = await _authService.GerarToken(loginIM.Email);
 
-                return Ok(token);
+                var userVM = new UserViewModel()
+                {
+                    Email = loginIM.Email,
+                    Token = token,
+                }; 
+
+                return Ok(userVM);
             }
             catch (Exception err)
             {

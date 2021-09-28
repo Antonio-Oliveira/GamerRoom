@@ -34,7 +34,10 @@ namespace GamerRoom.API.Service
                 Platform = gameUser.Game.Platform,
                 Publisher = gameUser.Game.Publisher,
                 ReleaseDate = gameUser.Game.ReleaseDate,
-                Id = gameUser.GameId
+                Id = gameUser.GameId,
+                TrailerUri = gameUser.Game.TrailerUri,
+                ImageUri = gameUser.Game.ImageUri
+
             };
 
             return gameVM;
@@ -55,7 +58,9 @@ namespace GamerRoom.API.Service
                 Platform = gameUser.Game.Platform,
                 Publisher = gameUser.Game.Publisher,
                 ReleaseDate = gameUser.Game.ReleaseDate,
-                Id = gameUser.GameId
+                Id = gameUser.GameId,
+                ImageUri = gameUser.Game.ImageUri,
+                TrailerUri = gameUser.Game.TrailerUri
             }).ToList();
         }
 

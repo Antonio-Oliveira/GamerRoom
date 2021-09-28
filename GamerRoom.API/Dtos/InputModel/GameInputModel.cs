@@ -24,9 +24,6 @@ namespace GamerRoom.API.Dtos.InputModel
         [StringLength(50, MinimumLength = 1, ErrorMessage = "O Nome da Publicadora deve conter entre 1 a 100 caracteres")]
         public string Publisher { get; set; }
 
-        //[Required]
-        public string Image { get; set; }
-
         [Required]
         [StringLength(300, MinimumLength = 1, ErrorMessage = "O gênero do jogo deve conter entre 1 a 300 caracteres")]
         public string Genre { get; set; }
@@ -39,8 +36,15 @@ namespace GamerRoom.API.Dtos.InputModel
         [StringLength(100, MinimumLength = 2, ErrorMessage = "A Nome da Publicadora deve conter entre 1 a 100 caracteres")]
         public string Mode { get; set; }
 
+        [Required]
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
+
+        [Required]
+        public string ImageUri { get; set; }
+
+        [Required]
+        public string TrailerUri { get; set; }
     }
 }
