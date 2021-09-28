@@ -18,27 +18,21 @@ namespace GamerRoom.web.mvc.Controllers
             _authService = authService;
         }
 
-        
+
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
-        
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginInputModel loginInputModel)
         {
             try
             {
-                loginInputModel = new LoginInputModel()
-                {
-                    Email = "teste@gmail.com",
-                    Password = "Tonyn.2001"
-                };
-
                 var user = await _authService.Login(loginInputModel);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (ApiException err)
             {
@@ -52,24 +46,29 @@ namespace GamerRoom.web.mvc.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterInputModel registerInputModel)
         {
             try
             {
-                registerInputModel = new RegisterInputModel()
+                if (!ModelState.IsValid) 
                 {
-                    Email = "tony@gmail.com",
-                    Password = "Tonyn.2001",
-                    ConfirmPassword = "Tonyn.2001",
-                    UserName = "Stain"
-                };
+                    throw new Exception("Error registering user, try again.");
+                }
 
                 var user = await _authService.Register(registerInputModel);
                 return RedirectToAction("Index", "Home");
             }
             catch (ApiException err)
             {
-                ModelState.AddModelError(" ", err.Message);
+                ModelState.AddModelError(" ", "Erro na api");
                 return View();
             }
             catch (Exception err)

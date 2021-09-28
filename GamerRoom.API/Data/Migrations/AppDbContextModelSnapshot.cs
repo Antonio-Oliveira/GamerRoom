@@ -107,7 +107,9 @@ namespace GamerRoom.API.Data.Migrations
                         .HasColumnName("Genre");
 
                     b.Property<string>("ImageUri")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ImageUri");
 
                     b.Property<string>("Mode")
                         .IsRequired()
@@ -130,7 +132,13 @@ namespace GamerRoom.API.Data.Migrations
                         .HasColumnName("Publisher");
 
                     b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("ReleaseDate");
+
+                    b.Property<string>("TrailerUri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TrailerUri");
 
                     b.HasKey("Id");
 

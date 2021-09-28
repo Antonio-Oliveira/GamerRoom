@@ -45,11 +45,12 @@ namespace GamerRoom.web.mvc
                 }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
 
             services
-                .AddRefitClient<IAuthService>()
-                .ConfigureHttpClient(c =>
-                {
-                    c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
-                }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
+               .AddRefitClient<IAuthService>()
+               .AddHttpMessageHandler<BearerTokenMessageHandler>()
+               .ConfigureHttpClient(c =>
+               {
+                   c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
+               }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
 
             #endregion
 

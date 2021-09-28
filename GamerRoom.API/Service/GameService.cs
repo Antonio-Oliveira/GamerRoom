@@ -47,7 +47,9 @@ namespace GamerRoom.API.Service
                     Platform = game.Platform,
                     Mode = game.Mode,
                     ReleaseDate = game.ReleaseDate,
-                    Rating = calcRating
+                    Rating = calcRating,
+                    TrailerUri = game.TrailerUri,
+                    ImageUri = game.ImageUri
                 });
             }
 
@@ -79,7 +81,9 @@ namespace GamerRoom.API.Service
                 Genre = game.Genre,
                 Mode = game.Mode,
                 ReleaseDate = game.ReleaseDate,
-                Rating = calcRating
+                Rating = calcRating,
+                ImageUri = game.ImageUri,
+                TrailerUri = game.TrailerUri
             };
         }
 
@@ -99,7 +103,10 @@ namespace GamerRoom.API.Service
                 Publisher = gameInputModel.Publisher,
                 Platform = gameInputModel.Platform,
                 Genre = gameInputModel.Genre,
-                Mode = gameInputModel.Mode
+                Mode = gameInputModel.Mode,
+                ImageUri = gameInputModel.ImageUri,
+                ReleaseDate = gameInputModel.ReleaseDate,
+                TrailerUri = gameInputModel.TrailerUri
             };
 
             await _gameRepository.Insert(gameInsert);
@@ -113,7 +120,10 @@ namespace GamerRoom.API.Service
                 Publisher = gameInsert.Publisher,
                 Platform = gameInsert.Platform,
                 Genre = gameInsert.Genre,
-                Mode = gameInsert.Mode
+                Mode = gameInsert.Mode,
+                TrailerUri = gameInsert.TrailerUri,
+                ReleaseDate = gameInsert.ReleaseDate,
+                ImageUri = gameInsert.ImageUri,
             };
         }
 
@@ -133,7 +143,10 @@ namespace GamerRoom.API.Service
                 Publisher = gameInputModel.Publisher,
                 Platform = gameInputModel.Platform,
                 Genre = gameInputModel.Genre,
-                Mode = gameInputModel.Mode
+                Mode = gameInputModel.Mode,
+                ImageUri = gameInputModel.ImageUri,
+                ReleaseDate = gameInputModel.ReleaseDate,
+                TrailerUri = gameInputModel.TrailerUri
             };
 
             await _gameRepository.Update(gameUpdate);
@@ -147,7 +160,10 @@ namespace GamerRoom.API.Service
                 Publisher = gameUpdate.Publisher,
                 Platform = gameUpdate.Platform,
                 Genre = gameUpdate.Genre,
-                Mode = gameUpdate.Mode
+                Mode = gameUpdate.Mode,
+                ImageUri = gameUpdate.ImageUri,
+                TrailerUri = gameInputModel.TrailerUri,
+                ReleaseDate = gameInputModel.ReleaseDate
             };
         }
 

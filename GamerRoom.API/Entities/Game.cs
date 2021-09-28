@@ -26,5 +26,7 @@ namespace GamerRoom.API.Entities
         public DateTime ReleaseDate { get; set; }
 
         public string ImageUri { get; set; }
+
+        public string TrailerUri { get; set; }
     }
 }

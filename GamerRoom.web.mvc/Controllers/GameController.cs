@@ -25,8 +25,8 @@ namespace GamerRoom.web.mvc.Controllers
         {
             try
             {
-                var games = await _gameService.ListGames();
-                return View(games);
+                //var games = await _gameService.ListGames();
+                return View(/*games*/);
             }
             catch (ApiException err)
             {
@@ -45,8 +45,8 @@ namespace GamerRoom.web.mvc.Controllers
         {
             try
             {
-                var game = await _gameService.GetGame(idGame);
-                return View(game);
+                //var game = await _gameService.GetGame(idGame);
+                return View(/*game*/);
             }
             catch (ApiException err)
             {

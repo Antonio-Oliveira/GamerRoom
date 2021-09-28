@@ -48,6 +48,18 @@ namespace GamerRoom.API.Data.Mappings
             builder.Property(p => p.Mode)
                 .IsRequired()
                 .HasColumnName("Mode");
+
+            builder.Property(p => p.ReleaseDate)
+                .IsRequired()
+                .HasColumnName("ReleaseDate");
+
+            builder.Property(p => p.ImageUri)
+                .IsRequired()
+                .HasColumnName("ImageUri");
+
+            builder.Property(p => p.TrailerUri)
+               .IsRequired()
+               .HasColumnName("TrailerUri");
         }
     }
 }
