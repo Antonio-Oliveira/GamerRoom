@@ -1,4 +1,5 @@
-﻿
+﻿@model RegisterInputModel
+
 @{
     Layout = null;
 }
@@ -28,23 +29,39 @@
 
             <div class="register">
                 <p class="description description-second">Put on your headset, it's time to dive in!</p>
-                <form class="form">
+                <form class="form" asp-controller="Auth" asp-action="Register" method="post" role="form">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
                     <label class="label-input" for="">
+                        <span asp-validation-for="UserName" class=""></span>
                         <i class="far fa-user icon-modify"></i>
-                        <input type="text" placeholder="Name">
+                        <input asp-for="UserName" id="userName" placeholder="Name" />
                     </label>
 
+
                     <label class="label-input" for="">
+                        <span asp-validation-for="Email" class=""></span>
                         <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" placeholder="Email">
+                        <input asp-for="Email" id="email" placeholder="Email" />
+                    </label>
+
+
+                    <label class="label-input" for="">
+                        <span asp-validation-for="Password" class=""></span>
+                        <i class="fas fa-lock icon-modify"></i>
+                        <input asp-for="Password" id="password" placeholder="Password" type="password" />
                     </label>
 
                     <label class="label-input" for="">
+                        <span asp-validation-for="ConfirmPassword" class=""></span>
                         <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" placeholder="Password">
+                        <input asp-for="ConfirmPassword" id="confirmPassword" placeholder="Password" type="password" />
                     </label>
 
                     <button class="btn btn-second">sign up</button>
+
                 </form>
             </div>
 

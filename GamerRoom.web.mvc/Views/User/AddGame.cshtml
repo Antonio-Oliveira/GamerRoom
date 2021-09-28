@@ -1,0 +1,25 @@
+﻿@model UserGameInputModel
+
+@{
+    ViewData["Title"] = "AddGame";
+}
+
+
+
+<form asp-controller="User" asp-action="AddGame" method="post" role="form">
+
+    <label class="label-input" for="">
+        <span asp-validation-for="IdGame" class=""></span>
+        <input asp-for="IdGame" id="idGame" placeholder="@Model.IdGame" />
+    </label>
+
+
+    <label class="label-input" for="">
+        <span asp-validation-for="Rating" class=""></span>
+        <input asp-for="Rating" id="rating" placeholder="rating" type="number" />
+    </label>
+
+    <button class="btn btn-second">Avaliar</button>
+
+</form>
+

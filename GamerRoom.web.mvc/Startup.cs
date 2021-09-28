@@ -51,10 +51,21 @@ namespace GamerRoom.web.mvc
                    c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
                }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
 
+            services
+               .AddRefitClient<IUserService>()
+               .ConfigureHttpClient(c =>
+               {
+                   c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
+               }).ConfigurePrimaryHttpMessageHandler(c => clientHandler);
+
             #endregion
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie();
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Auth/Login";
+                    options.AccessDeniedPath = "/Auth/Login";
+                });
 
             services.AddHttpContextAccessor();
             services.AddRazorPages().AddRazorRuntimeCompilation();

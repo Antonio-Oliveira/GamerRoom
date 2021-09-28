@@ -1,6 +1,7 @@
 ﻿using GamerRoom.web.mvc.Models;
 using GamerRoom.web.mvc.Models.Home;
 using GamerRoom.web.mvc.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -52,6 +53,7 @@ namespace GamerRoom.web.mvc.Controllers
             }
         }
 
+        [Microsoft.AspNetCore.Authorization.Authorize]
         public async Task<ActionResult> Favorites()
         {
             var games = await _gameService.ListGames();
