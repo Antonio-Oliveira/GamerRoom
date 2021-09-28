@@ -5,7 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GamerRoom</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,17 +27,28 @@
         <div class="menu">
             <ul>
                 <li><a asp-controller="Home" asp-action="Index">HOME</a></li>
-                <li><a asp-controller="Home" asp-action="Gamelist">GAME LIST</a></li>
                 <li><a asp-controller="Home" asp-action="Favorites">MY FAVORITES LIST</a></li>
                 <li><a asp-controller="Home" asp-action="EditorPick">EDITOR'S PICK</a></li>
             </ul>
         </div>
 
-        <div class="user">
-            <a asp-controller="Auth" asp-action="Login">
-                <img class="user" src="~/media/icons/user.svg" alt="user">
-            </a>
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="user">
+                <a class="user" asp-controller="Auth" asp-action="Logout">
+                    <img class="user" src="~/media/icons/user.svg" alt="user">
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="user">
+                <a class="user" asp-controller="Auth" asp-action="Login">
+                    <img class="user" src="~/media/icons/user.svg" alt="user">
+                </a>
+            </div>
+        }
+
     </header>
 
     <div class="container">
@@ -89,7 +102,7 @@
         </div>
 
     </footer>
-  
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -115,5 +115,12 @@ namespace GamerRoom.web.mvc.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

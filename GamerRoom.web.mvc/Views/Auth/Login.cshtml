@@ -1,4 +1,5 @@
-﻿
+﻿@model LoginInputModel
+
 @{
     Layout = null;
 }
@@ -28,19 +29,25 @@
 
             <div class="register">
                 <p class="description description-second">Time to full dive!</p>
-                <form class="form">
+                <form class="form" asp-controller="Auth" asp-action="Login" method="post" role="form">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 
                     <label class="label-input" for="">
+                        <span asp-validation-for="Email" class=""></span>
                         <i class="far fa-envelope icon-modify"></i>
-                        <input type="email" placeholder="Email">
+                        <input asp-for="Email" id="email" placeholder="Email" />
                     </label>
+
 
                     <label class="label-input" for="">
+                        <span asp-validation-for="Password" class=""></span>
                         <i class="fas fa-lock icon-modify"></i>
-                        <input type="password" placeholder="Password">
+                        <input asp-for="Password" id="password" placeholder="Password" type="password" />
                     </label>
 
-                    <a href="#"> You’re not a member? Sign up </a>
+                    <a asp-controller="Auth" asp-action="Register"> You’re not a member? Sign up </a>
 
                     <button class="btn btn-second">sign in</button>
                 </form>
