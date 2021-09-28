@@ -1,15 +1,9 @@
-﻿using GamerRoom.API.Entities;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace GamerRoom.API.Controllers
 {
     public class BlobController : Controller
-    {
+    {/*
         private readonly IConfiguration _configuration;
 
         public BlobController(IConfiguration configuration)
@@ -54,6 +48,6 @@ namespace GamerRoom.API.Controllers
 
             //Obtem o URL do arquvivo no blob
             return blob.SnapshotQualifiedStorageUri.PrimaryUri.ToString();
-        }
+        }*/
     }
 }
