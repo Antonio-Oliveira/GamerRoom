@@ -22,12 +22,15 @@
         <div class="second-column">
 
             <div class="logo-register">
-                <img src="~/media/Logo.png" />
+                <img src="~/media/login.jpeg" />
             </div>
 
             <div class="register">
                 <p class="description description-second">Time to full dive!</p>
-                <form class="form" asp-controller="Auth" asp-action="Login" method="post" role="form"> 
+                <form class="form" asp-controller="Auth" asp-action="Login" method="post" role="form">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 
                     <label class="label-input" for="">
                         <span asp-validation-for="Email" class=""></span>

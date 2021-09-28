@@ -40,7 +40,6 @@ namespace GamerRoom.API.Controllers
                     Email = registerIM.Email,
                     Token = token,
                 };
-
                 return Ok(userVM);
             }
             catch (Exception err)

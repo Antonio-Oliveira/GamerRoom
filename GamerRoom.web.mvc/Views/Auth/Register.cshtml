@@ -16,7 +16,7 @@
     <div class="container">
 
         <div clas="first-column">
-            <img src="~/media/Register.jpeg" />
+            <img src="~/media/register.jpeg" />
         </div>
 
         <div class="second-column">
@@ -28,6 +28,8 @@
             <div class="register">
                 <p class="description description-second">Put on your headset, it's time to dive in!</p>
                 <form class="form" asp-controller="Auth" asp-action="Register" method="post" role="form">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
                     <label class="label-input" for="">

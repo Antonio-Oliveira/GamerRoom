@@ -18,7 +18,7 @@ namespace GamerRoom.web.mvc.Controllers
             _authService = authService;
         }
 
-        
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -26,12 +26,13 @@ namespace GamerRoom.web.mvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginInputModel loginInputModel)
         {
             try
             {
                 var user = await _authService.Login(loginInputModel);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (ApiException err)
             {
@@ -52,6 +53,7 @@ namespace GamerRoom.web.mvc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterInputModel registerInputModel)
         {
             try
@@ -66,7 +68,7 @@ namespace GamerRoom.web.mvc.Controllers
             }
             catch (ApiException err)
             {
-                ModelState.AddModelError(" ", err.Message);
+                ModelState.AddModelError(" ", "Erro na api");
                 return View();
             }
             catch (Exception err)

@@ -13,7 +13,7 @@ namespace GamerRoom.web.mvc.Service.Interfaces
         [Post("/api/Auth/Login")]
         Task<UserViewModel> Login(LoginInputModel loginInputModel);
 
-        [Post("/api​/Auth/Register")]
-        Task<UserViewModel> Register(RegisterInputModel registerInputModel);
+        [Post("/api​/Auth/Register/{test}")]
+        Task<int> Register(int test);
     }
 }
