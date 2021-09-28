@@ -1,10 +1,13 @@
 ﻿using GamerRoom.web.mvc.Models.Auth;
 using GamerRoom.web.mvc.Service.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Refit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace GamerRoom.web.mvc.Controllers
@@ -31,7 +34,27 @@ namespace GamerRoom.web.mvc.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception("Login error, try again.");
+                }
+
                 var user = await _authService.Login(loginInputModel);
+
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Email),
+                    new Claim("token", user.Token)
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddDays(1))
+                };
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
                 return RedirectToAction("Index", "Home");
             }
             catch (ApiException err)
@@ -54,7 +77,7 @@ namespace GamerRoom.web.mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterInputModel registerInputModel)
+        public async Task<ActionResult> Register(RegisterInputModel registerInputModel)
         {
             try
             {
@@ -64,11 +87,26 @@ namespace GamerRoom.web.mvc.Controllers
                 }
 
                 var user = await _authService.Register(registerInputModel);
+
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Email),
+                    new Claim("token", user.Token)
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                var authProperties = new AuthenticationProperties
+                {
+                    ExpiresUtc = new DateTimeOffset(DateTime.UtcNow.AddDays(1))
+                };
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
                 return RedirectToAction("Index", "Home");
             }
             catch (ApiException err)
             {
-                ModelState.AddModelError(" ", "Erro na api");
+                ModelState.AddModelError(" ", err.Message);
                 return View();
             }
             catch (Exception err)

@@ -46,7 +46,6 @@ namespace GamerRoom.web.mvc
 
             services
                .AddRefitClient<IAuthService>()
-               .AddHttpMessageHandler<BearerTokenMessageHandler>()
                .ConfigureHttpClient(c =>
                {
                    c.BaseAddress = new Uri(Configuration.GetValue<string>("UrlApiGamesRoom"));
