@@ -2,7 +2,7 @@
 
 namespace GamerRoom.API.Data.Migrations
 {
-    public partial class PopulerTable : Migration
+    public partial class PopuleTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

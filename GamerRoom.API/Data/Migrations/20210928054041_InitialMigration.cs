@@ -59,7 +59,8 @@ namespace GamerRoom.API.Data.Migrations
                     Platform = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Mode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ImageUri = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImageUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TrailerUri = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

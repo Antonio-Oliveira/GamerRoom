@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamerRoom.API.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210926182026_PopuleTableGames")]
-    partial class PopuleTableGames
+    [Migration("20210928054041_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +109,9 @@ namespace GamerRoom.API.Data.Migrations
                         .HasColumnName("Genre");
 
                     b.Property<string>("ImageUri")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("ImageUri");
 
                     b.Property<string>("Mode")
                         .IsRequired()
@@ -132,7 +134,13 @@ namespace GamerRoom.API.Data.Migrations
                         .HasColumnName("Publisher");
 
                     b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("ReleaseDate");
+
+                    b.Property<string>("TrailerUri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TrailerUri");
 
                     b.HasKey("Id");
 
